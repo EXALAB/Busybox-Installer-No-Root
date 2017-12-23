@@ -426,7 +426,7 @@ public class DashBoard extends Fragment {
                 try{
                     startActivity(intent);
                 }catch(ActivityNotFoundException e){
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=exa.pro.ubs.r")));
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=jackpal.androidterm")));
                 }
                 dialog.dismiss();
             }
