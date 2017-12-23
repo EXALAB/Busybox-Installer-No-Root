@@ -17,7 +17,7 @@ public class UpdateReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent){
 
-        int i = context.getSharedPreferences("GlobalPreferences", 0).getInt("BinaryVersion", 0);
+        int i = context.getSharedPreferences("GlobalPreferences", 0).getInt("Version", 0);
         int i2 = Integer.valueOf(context.getString(R.string.version));
 
         if(i != 0 && i < i2){
