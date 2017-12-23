@@ -8,16 +8,17 @@ We compiled the busybox binary statically without any modification, the .config 
 
 
 
-Supported architecture:
+### Supported architecture:
 
 arm, arm64, x86, mips
 
-Current version of busybox:
+
+### Current version of busybox:
 
 1.27.2
 
 
-Included applet:
+### Included applet:
 
 [, [[, acpid, add-shell, addgroup, adduser, adjtimex, arp, arping, ash,
 	awk, base64, basename, beep, blkdiscard, blkid, blockdev, bootchartd,
