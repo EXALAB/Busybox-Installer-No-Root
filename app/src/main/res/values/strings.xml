@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Busybox Installer (no root)</string>
+    <string name="version">1272</string>
+    <string name="version_string">1.27.2</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="about">About</string>
+    <string name="others">Others</string>
+    <string name="about_busybox">About Busybox</string>
+    <string name="about_busybox_content">Note: Please scroll down for full content.\n\nBusyBox combines tiny versions of many common UNIX utilities into a single small executable. It provides replacements for most of the utilities you usually find in GNU fileutils, shellutils, etc The utilities in BusyBox generally have fewer options than their full-featured GNU cousins; however, the options that are included provide the expected functionality and behave very much like their GNU counterparts. BusyBox provides a fairly complete environment for any small or embedded system.\n\nBusyBox has been written with size-optimization and limited resources in mind. It is also extremely modular so you can easily include or exclude commands (or features) at compile time. This makes it easy to customize your embedded systems. To create a working system, just add some device nodes in /dev, a few configuration files in /etc, and a Linux kernel.\n\nBusyBox is maintained by Denys Vlasenko, and licensed under the GNU GENERAL PUBLIC LICENSE version 2.\n\n\n\nTo be clear, we EXA LAB are not author of Busybox, we only compile the binary statically with cross compiler without any modification to source.\n\nYou can find the binary, .config file for compiling, and the source code of this app by clicking the button below, clicking the button will open a url in the browser which will be redirect to your requested content.</string>
+    <string name="press_again_to_exit">Please press again to exit application</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="ok">OK</string>
+    <string name="about_content">Busybox Installer (no root) is an app designed to bring busybox to android device without root access.\n\nThanks for using this apps.\n\n\nRegards, EXA Lab</string>
+    <string name="step1">Step 1 : Click on the button to install Busybox</string>
+    <string name="step2">Step 2 : Copy the command to clipboard : \n\nexport PATH=/data/data/exa.free.bbin/files/:$PATH</string>
+    <string name="step3">Launch terminal, paste and enter the command and you can start busybox. You must paste and enter the command every time you restart the terminal.</string>
+    <string name="installing">Installing</string>
+    <string name="updating">Updating</string>
+    <string name="reinstalling">Reinstalling</string>
+</resources>

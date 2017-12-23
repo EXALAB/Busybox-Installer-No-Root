@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/dashboard"
+            android:icon="@drawable/ic_dashboard"
+            android:title="@string/dashboard" />
+    </group>
+
+    <item android:title="@string/others">
+        <menu>
+            <item
+                android:id="@+id/about"
+                android:icon="@drawable/ic_about"
+                android:title="@string/about" />
+
+            <item
+                android:id="@+id/about_busybox"
+                android:icon="@drawable/ic_about"
+                android:title="@string/about_busybox" />
+        </menu>
+    </item>
+
+</menu>
