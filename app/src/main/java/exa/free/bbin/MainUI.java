@@ -15,6 +15,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.MobileAds;
+
 public class MainUI extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     Context context;
@@ -27,6 +29,8 @@ public class MainUI extends AppCompatActivity implements NavigationView.OnNaviga
         setContentView(R.layout.main_ui);
 
         context = getApplicationContext();
+
+        MobileAds.initialize(this);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
 

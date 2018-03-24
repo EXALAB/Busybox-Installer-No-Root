@@ -24,6 +24,11 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
+
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.IOException;
@@ -42,6 +47,8 @@ public class DashBoard extends Fragment {
     Button button2;
     Button button3;
     TextView textView2;
+    InterstitialAd mInterstitialAd;
+    AdView mAdView;
     int version;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
@@ -61,8 +68,14 @@ public class DashBoard extends Fragment {
         button = view.findViewById(R.id.button);
         button2 = view.findViewById(R.id.button2);
         button3 = view.findViewById(R.id.button3);
-
         textView2 = view.findViewById(R.id.textView2);
+
+        mAdView = view.findViewById(R.id.adView);
+        mAdView.loadAd(new AdRequest.Builder().build());
+
+        mInterstitialAd = new InterstitialAd(context);
+        mInterstitialAd.setAdUnitId("ca-app-pub-5748356089815497/5774034698");
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
 
         textView2.setText("Step 2 : Copy the command to clipboard :\n\n" + "export PATH=$PATH:" + context.getFilesDir());
 
@@ -81,12 +94,16 @@ public class DashBoard extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(button.getText().toString().equalsIgnoreCase("Install")){
-                    new Install().execute();
-                }else if(button.getText().toString().equalsIgnoreCase("Reinstall")){
-                    new Reinstall().execute();
-                }else if(button.getText().toString().equalsIgnoreCase("Update")){
-                    new Update().execute();
+                if(mInterstitialAd != null && mInterstitialAd.isLoaded()){
+                    mInterstitialAd.show();
+                }else{
+                    if(button.getText().toString().equalsIgnoreCase("Install")){
+                        new Install().execute();
+                    }else if(button.getText().toString().equalsIgnoreCase("Reinstall")){
+                        new Reinstall().execute();
+                    }else if(button.getText().toString().equalsIgnoreCase("Update")){
+                        new Update().execute();
+                    }
                 }
             }
         });
@@ -116,6 +133,26 @@ public class DashBoard extends Fragment {
             Toast.makeText(context, "Please download genuine version from play store", Toast.LENGTH_LONG).show();
             ActivityCompat.finishAffinity(getActivity());
         }
+
+        mAdView.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+                mAdView.loadAd(new AdRequest.Builder().build());
+            }
+        });
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+                mInterstitialAd.loadAd(new AdRequest.Builder().build());
+                if(button.getText().toString().equalsIgnoreCase("Install")){
+                    new Install().execute();
+                }else if(button.getText().toString().equalsIgnoreCase("Reinstall")){
+                    new Reinstall().execute();
+                }else if(button.getText().toString().equalsIgnoreCase("Update")){
+                    new Update().execute();
+                }
+            }
+        });
 
         return view;
     }
