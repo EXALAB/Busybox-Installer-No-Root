@@ -16,6 +16,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
+import android.system.Os;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -197,14 +198,25 @@ public class DashBoard extends Fragment {
             }
             if(s.equals("arm64-v8a")){
                 CreateFile("busybox", R.raw.busybox_arm64);
-            }else if (s.equals("armeabi") | s.equals("armeabi-v7a")){
+            }else if (s.contains("arm")){
                 CreateFile("busybox", R.raw.busybox_arm);
-            }else if(s.equals("x86") | s.equals("x86_64")){
+            }else if(s.equals("x86")){
                 CreateFile("busybox", R.raw.busybox_x86);
-            }else if(s.equals("mips") | s.equals("mips64")){
+            }else if(s.equals("x86_64")){
+                CreateFile("busybox", R.raw.busybox_amd64);
+            }else if(s.equals("mips")){
                 CreateFile("busybox", R.raw.busybox_mips);
+            }else if(s.equals("mips64")){
+                CreateFile("busybox", R.raw.busybox_mips64);
             }else{
                 Toast.makeText(context, "Sorry, your device is not supported !", Toast.LENGTH_LONG).show();
+            }
+            if(Build.VERSION.SDK_INT >= 21){
+                try{
+                    Os.symlink(context.getFilesDir() + "/busybox", "" + context.getFilesDir());
+                }catch(Exception e){
+
+                }
             }
             return null;
         }
@@ -264,12 +276,16 @@ public class DashBoard extends Fragment {
             }
             if(s.equals("arm64-v8a")){
                 CreateFile("busybox", R.raw.busybox_arm64);
-            }else if (s.equals("armeabi") | s.equals("armeabi-v7a")){
+            }else if (s.contains("arm")){
                 CreateFile("busybox", R.raw.busybox_arm);
-            }else if(s.equals("x86") | s.equals("x86_64")){
+            }else if(s.equals("x86")){
                 CreateFile("busybox", R.raw.busybox_x86);
-            }else if(s.equals("mips") | s.equals("mips64")){
+            }else if(s.equals("x86_64")){
+                CreateFile("busybox", R.raw.busybox_amd64);
+            }else if(s.equals("mips")){
                 CreateFile("busybox", R.raw.busybox_mips);
+            }else if(s.equals("mips64")){
+                CreateFile("busybox", R.raw.busybox_mips64);
             }else{
                 Toast.makeText(context, "Sorry, your device is not supported !", Toast.LENGTH_LONG).show();
             }
@@ -332,12 +348,16 @@ public class DashBoard extends Fragment {
             }
             if(s.equals("arm64-v8a")){
                 CreateFile("busybox", R.raw.busybox_arm64);
-            }else if (s.equals("armeabi") | s.equals("armeabi-v7a")){
+            }else if (s.contains("arm")){
                 CreateFile("busybox", R.raw.busybox_arm);
-            }else if(s.equals("x86") | s.equals("x86_64")){
+            }else if(s.equals("x86")){
                 CreateFile("busybox", R.raw.busybox_x86);
-            }else if(s.equals("mips") | s.equals("mips64")){
+            }else if(s.equals("x86_64")){
+                CreateFile("busybox", R.raw.busybox_amd64);
+            }else if(s.equals("mips")){
                 CreateFile("busybox", R.raw.busybox_mips);
+            }else if(s.equals("mips64")){
+                CreateFile("busybox", R.raw.busybox_mips64);
             }else{
                 Toast.makeText(context, "Sorry, your device is not supported !", Toast.LENGTH_LONG).show();
             }

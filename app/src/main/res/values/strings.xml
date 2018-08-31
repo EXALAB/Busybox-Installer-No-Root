@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Busybox Installer (no root)</string>
-    <string name="version">1272</string>
-    <string name="version_string">1.27.2</string>
+    <string name="version">1292</string>
+    <string name="version_string">1.29.2</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="dashboard">Dashboard</string>

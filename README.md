@@ -4,18 +4,20 @@ Busybox Installer (no root) is an app designed to bring busybox to android devic
 
 
 
-We compiled the busybox binary statically without any modification, the .config file use for compiling could be found in config folder.
+We compiled the busybox binary statically by using command below
+
+> make clean && make defconfig && make CROSS_COMPILE="/path/to/cross/compiler" LDFLAGS="--static"
 
 
 
 ### Supported architecture:
 
-arm, arm64, x86, mips
+arm, arm64, x86, x86_64 mips, mips64
 
 
 ### Current version of busybox:
 
-1.27.2
+1.29.2
 
 
 ### Included applet:
