@@ -15,6 +15,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 
 public class MainUI extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -22,6 +25,8 @@ public class MainUI extends AppCompatActivity implements NavigationView.OnNaviga
     Context context;
     private long lastPressedTime;
     private static final int PERIOD = 3000;
+    NavigationView navigationView;
+    AdView mAdView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +36,9 @@ public class MainUI extends AppCompatActivity implements NavigationView.OnNaviga
         context = getApplicationContext();
 
         MobileAds.initialize(this);
+
+        mAdView = findViewById(R.id.adView);
+        mAdView.loadAd(new AdRequest.Builder().build());
 
         Toolbar toolbar = findViewById(R.id.toolbar);
 
@@ -42,10 +50,20 @@ public class MainUI extends AppCompatActivity implements NavigationView.OnNaviga
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        mAdView.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+                mAdView.loadAd(new AdRequest.Builder().build());
+            }
+        });
+
         if(savedInstanceState == null){
+            MenuItem selected = navigationView.getMenu().findItem(R.id.method1);
+            selected.setCheckable(true);
+            selected.setChecked(true);
             newFragment(0);
         }
     }
@@ -54,35 +72,20 @@ public class MainUI extends AppCompatActivity implements NavigationView.OnNaviga
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
 
-        Fragment fragment = this.getFragmentManager().findFragmentById(R.id.fragmentHolder);
-        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-
         if(event.getKeyCode() == KeyEvent.KEYCODE_BACK){
-            if(fragment instanceof DashBoard){
-                if(drawer.isDrawerOpen(GravityCompat.START)){
-                    switch(event.getAction()){
-                        case KeyEvent.ACTION_DOWN:
-                            if(event.getDownTime() - lastPressedTime < PERIOD){
-                                finish();
-                            }else{
-                                Toast.makeText(context, R.string.press_again_to_exit, Toast.LENGTH_SHORT).show();
-                                lastPressedTime = event.getEventTime();
-                            }
-                            return true;
-                    }
-                }else if(!drawer.isDrawerOpen(GravityCompat.START)){
-                    drawer.openDrawer(GravityCompat.START);
+            if(drawer.isDrawerOpen(GravityCompat.START)){
+                switch(event.getAction()){
+                    case KeyEvent.ACTION_DOWN:
+                        if(event.getDownTime() - lastPressedTime < PERIOD){
+                            finish();
+                        }else{
+                            Toast.makeText(context, R.string.press_again_to_exit, Toast.LENGTH_SHORT).show();
+                            lastPressedTime = event.getEventTime();
+                        }
+                        return true;
                 }
-            }else if(fragment instanceof About){
-                fragment = new DashBoard();
-                fragmentTransaction.replace(R.id.fragmentHolder, fragment);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
-            }else if(fragment instanceof AboutBusybox){
-                fragment = new DashBoard();
-                fragmentTransaction.replace(R.id.fragmentHolder, fragment);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
+            }else if(!drawer.isDrawerOpen(GravityCompat.START)){
+                drawer.openDrawer(GravityCompat.START);
             }
         }
         return false;
@@ -92,12 +95,31 @@ public class MainUI extends AppCompatActivity implements NavigationView.OnNaviga
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.dashboard) {
+        if (id == R.id.method1) {
+            MenuItem selected = navigationView.getMenu().findItem(R.id.method1);
+            selected.setCheckable(true);
+            selected.setChecked(true);
             newFragment(0);
-        }else if(id == R.id.about){
+        }else if(id == R.id.method2){
+            MenuItem selected = navigationView.getMenu().findItem(R.id.method2);
+            selected.setCheckable(true);
+            selected.setChecked(true);
             newFragment(1);
-        }else if(id == R.id.about_busybox){
+        }else if(id == R.id.settings){
+            MenuItem selected = navigationView.getMenu().findItem(R.id.settings);
+            selected.setCheckable(true);
+            selected.setChecked(true);
             newFragment(2);
+        }else if(id == R.id.about){
+            MenuItem selected = navigationView.getMenu().findItem(R.id.about);
+            selected.setCheckable(true);
+            selected.setChecked(true);
+            newFragment(3);
+        }else if(id == R.id.about_busybox){
+            MenuItem selected = navigationView.getMenu().findItem(R.id.about_busybox);
+            selected.setCheckable(true);
+            selected.setChecked(true);
+            newFragment(4);
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -112,20 +134,34 @@ public class MainUI extends AppCompatActivity implements NavigationView.OnNaviga
         switch(position){
 
             case 0:
-                fragment = new DashBoard();
+                fragment = new Method1();
                 fragmentTransaction.replace(R.id.fragmentHolder, fragment);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
                 break;
 
             case 1:
-                fragment = new About();
+                fragment = new Method2();
                 fragmentTransaction.replace(R.id.fragmentHolder, fragment);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
                 break;
 
             case 2:
+                fragment = new Settings();
+                fragmentTransaction.replace(R.id.fragmentHolder, fragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+                break;
+
+            case 3:
+                fragment = new About();
+                fragmentTransaction.replace(R.id.fragmentHolder, fragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+                break;
+
+            case 4:
                 fragment = new AboutBusybox();
                 fragmentTransaction.replace(R.id.fragmentHolder, fragment);
                 fragmentTransaction.addToBackStack(null);

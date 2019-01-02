@@ -5,13 +5,22 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/dashboard"
-            android:icon="@drawable/ic_dashboard"
-            android:title="@string/dashboard" />
+            android:id="@+id/method1"
+            android:icon="@drawable/ic_method1"
+            android:title="@string/method1" />
+        <item
+            android:id="@+id/method2"
+            android:icon="@drawable/ic_method2"
+            android:title="@string/method2" />
     </group>
 
     <item android:title="@string/others">
         <menu>
+            <item
+                android:id="@+id/settings"
+                android:icon="@drawable/ic_settings"
+                android:title="@string/settings" />
+
             <item
                 android:id="@+id/about"
                 android:icon="@drawable/ic_about"
