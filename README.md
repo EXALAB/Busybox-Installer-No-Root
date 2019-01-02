@@ -17,7 +17,7 @@ arm, arm64, x86, x86_64 mips, mips64
 
 ### Current version of busybox:
 
-1.29.2
+1.30.0
 
 
 ### Included applet:
