@@ -7,8 +7,8 @@ android {
         applicationId "exa.free.bbin"
         minSdkVersion 14
         targetSdkVersion 26
-        versionCode 17
-        versionName "1.7"
+        versionCode 171
+        versionName "1.71"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
