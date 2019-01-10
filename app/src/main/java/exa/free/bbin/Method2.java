@@ -83,28 +83,28 @@ public class Method2 extends Fragment implements AppSelector {
 
         if(s.equals("None")){
             textView2.setText("Step 2 : Please Choose a Terminal Emulator App first");
-            textView4.setText("Step 2 : Please Choose a Terminal Emulator App first");
+            textView4.setText("Step 4 : Please Choose a Terminal Emulator App first");
             button2.setEnabled(false);
             button4.setEnabled(false);
         }else{
             if(s2.equals("arm64-v8a")){
-                textView2.setText("Step 2 : Copy the command to clipboard :\n\n" + "cd /data/data" + s + " && wget https://raw.githubusercontent.com/EXALAB/Busybox-Installer-No-Root/master/app/src/main/res/raw/busybox_arm64 && rm -rf busybox && mv busybox_arm64 busybox && chmod 755 busybox");
-                textView4.setText("Step 2 : Copy the command to clipboard :\n\n" + "cd /data/data" + s);
+                textView2.setText("Step 2 : Copy the command to clipboard :\n\n" + "cd /data/data/" + s + " && wget https://raw.githubusercontent.com/EXALAB/Busybox-Installer-No-Root/master/app/src/main/res/raw/busybox_arm64 && rm -rf busybox && mv busybox_arm64 busybox && chmod 755 busybox");
+                textView4.setText("Step 4 : Copy the command to clipboard :\n\n" + "cd /data/data/" + s);
             }else if (s2.contains("arm")){
-                textView2.setText("Step 2 : Copy the command to clipboard :\n\n" + "cd /data/data" + s + " && wget https://raw.githubusercontent.com/EXALAB/Busybox-Installer-No-Root/master/app/src/main/res/raw/busybox_arm && rm -rf busybox && mv busybox_arm busybox && chmod 755 busybox");
-                textView4.setText("Step 2 : Copy the command to clipboard :\n\n" + "cd /data/data" + s);
+                textView2.setText("Step 2 : Copy the command to clipboard :\n\n" + "cd /data/data/" + s + " && wget https://raw.githubusercontent.com/EXALAB/Busybox-Installer-No-Root/master/app/src/main/res/raw/busybox_arm && rm -rf busybox && mv busybox_arm busybox && chmod 755 busybox");
+                textView4.setText("Step 4 : Copy the command to clipboard :\n\n" + "cd /data/data/" + s);
             }else if(s2.equals("x86")){
-                textView2.setText("Step 2 : Copy the command to clipboard :\n\n" + "cd /data/data" + s + " && wget https://raw.githubusercontent.com/EXALAB/Busybox-Installer-No-Root/master/app/src/main/res/raw/busybox_x86 && rm -rf busybox && mv busybox_x86 busybox && chmod 755 busybox");
-                textView4.setText("Step 2 : Copy the command to clipboard :\n\n" + "cd /data/data" + s);
+                textView2.setText("Step 2 : Copy the command to clipboard :\n\n" + "cd /data/data/" + s + " && wget https://raw.githubusercontent.com/EXALAB/Busybox-Installer-No-Root/master/app/src/main/res/raw/busybox_x86 && rm -rf busybox && mv busybox_x86 busybox && chmod 755 busybox");
+                textView4.setText("Step 4 : Copy the command to clipboard :\n\n" + "cd /data/data/" + s);
             }else if(s2.equals("x86_64")){
-                textView2.setText("Step 2 : Copy the command to clipboard :\n\n" + "cd /data/data" + s + " && wget https://raw.githubusercontent.com/EXALAB/Busybox-Installer-No-Root/master/app/src/main/res/raw/busybox_amd64 && rm -rf busybox && mv busybox_amd64 busybox && chmod 755 busybox");
-                textView4.setText("Step 2 : Copy the command to clipboard :\n\n" + "cd /data/data" + s);
+                textView2.setText("Step 2 : Copy the command to clipboard :\n\n" + "cd /data/data/" + s + " && wget https://raw.githubusercontent.com/EXALAB/Busybox-Installer-No-Root/master/app/src/main/res/raw/busybox_amd64 && rm -rf busybox && mv busybox_amd64 busybox && chmod 755 busybox");
+                textView4.setText("Step 4 : Copy the command to clipboard :\n\n" + "cd /data/data/" + s);
             }else if(s2.equals("mips")){
-                textView2.setText("Step 2 : Copy the command to clipboard :\n\n" + "cd /data/data" + s + " && wget https://raw.githubusercontent.com/EXALAB/Busybox-Installer-No-Root/master/app/src/main/res/raw/busybox_mips && rm -rf busybox && mv busybox_mips busybox && chmod 755 busybox");
-                textView4.setText("Step 2 : Copy the command to clipboard :\n\n" + "cd /data/data" + s);
+                textView2.setText("Step 2 : Copy the command to clipboard :\n\n" + "cd /data/data/" + s + " && wget https://raw.githubusercontent.com/EXALAB/Busybox-Installer-No-Root/master/app/src/main/res/raw/busybox_mips && rm -rf busybox && mv busybox_mips busybox && chmod 755 busybox");
+                textView4.setText("Step 4 : Copy the command to clipboard :\n\n" + "cd /data/data/" + s);
             }else if(s2.equals("mips64")){
-                textView2.setText("Step 2 : Copy the command to clipboard :\n\n" + "cd /data/data" + s + " && wget https://raw.githubusercontent.com/EXALAB/Busybox-Installer-No-Root/master/app/src/main/res/raw/busybox_mips64 && rm -rf busybox && mv busybox_mips64 busybox && chmod 755 busybox");
-                textView4.setText("Step 2 : Copy the command to clipboard :\n\n" + "cd /data/data" + s);
+                textView2.setText("Step 2 : Copy the command to clipboard :\n\n" + "cd /data/data/" + s + " && wget https://raw.githubusercontent.com/EXALAB/Busybox-Installer-No-Root/master/app/src/main/res/raw/busybox_mips64 && rm -rf busybox && mv busybox_mips64 busybox && chmod 755 busybox");
+                textView4.setText("Step 4 : Copy the command to clipboard :\n\n" + "cd /data/data/" + s);
             }
         }
 
@@ -122,22 +122,22 @@ public class Method2 extends Fragment implements AppSelector {
                     mInterstitialAd.show();
                 }else{
                     if(s2.equals("arm64-v8a")){
-                        ClipData clip = ClipData.newPlainText("Command", "cd /data/data" + s + " && wget https://raw.githubusercontent.com/EXALAB/Busybox-Installer-No-Root/master/app/src/main/res/raw/busybox_arm64 && rm -rf busybox && mv busybox_arm64 busybox && chmod 755 busybox");
+                        ClipData clip = ClipData.newPlainText("Command", "cd /data/data/" + s + " && wget https://raw.githubusercontent.com/EXALAB/Busybox-Installer-No-Root/master/app/src/main/res/raw/busybox_arm64 && rm -rf busybox && mv busybox_arm64 busybox && chmod 755 busybox");
                         clipboard.setPrimaryClip(clip);
                     }else if (s2.contains("arm")){
-                        ClipData clip = ClipData.newPlainText("Command", "cd /data/data" + s + " && wget https://raw.githubusercontent.com/EXALAB/Busybox-Installer-No-Root/master/app/src/main/res/raw/busybox_arm && rm -rf busybox && mv busybox_arm busybox && chmod 755 busybox");
+                        ClipData clip = ClipData.newPlainText("Command", "cd /data/data/" + s + " && wget https://raw.githubusercontent.com/EXALAB/Busybox-Installer-No-Root/master/app/src/main/res/raw/busybox_arm && rm -rf busybox && mv busybox_arm busybox && chmod 755 busybox");
                         clipboard.setPrimaryClip(clip);
                     }else if(s2.equals("x86")){
-                        ClipData clip = ClipData.newPlainText("Command", "cd /data/data" + s + " && wget https://raw.githubusercontent.com/EXALAB/Busybox-Installer-No-Root/master/app/src/main/res/raw/busybox_x86 && rm -rf busybox && mv busybox_x86 busybox && chmod 755 busybox");
+                        ClipData clip = ClipData.newPlainText("Command", "cd /data/data/" + s + " && wget https://raw.githubusercontent.com/EXALAB/Busybox-Installer-No-Root/master/app/src/main/res/raw/busybox_x86 && rm -rf busybox && mv busybox_x86 busybox && chmod 755 busybox");
                         clipboard.setPrimaryClip(clip);
                     }else if(s2.equals("x86_64")){
-                        ClipData clip = ClipData.newPlainText("Command", "cd /data/data" + s + " && wget https://raw.githubusercontent.com/EXALAB/Busybox-Installer-No-Root/master/app/src/main/res/raw/busybox_amd64 && rm -rf busybox && mv busybox_amd64 busybox && chmod 755 busybox");
+                        ClipData clip = ClipData.newPlainText("Command", "cd /data/data/" + s + " && wget https://raw.githubusercontent.com/EXALAB/Busybox-Installer-No-Root/master/app/src/main/res/raw/busybox_amd64 && rm -rf busybox && mv busybox_amd64 busybox && chmod 755 busybox");
                         clipboard.setPrimaryClip(clip);
                     }else if(s2.equals("mips")){
-                        ClipData clip = ClipData.newPlainText("Command", "cd /data/data" + s + " && wget https://raw.githubusercontent.com/EXALAB/Busybox-Installer-No-Root/master/app/src/main/res/raw/busybox_mips && rm -rf busybox && mv busybox_mips busybox && chmod 755 busybox");
+                        ClipData clip = ClipData.newPlainText("Command", "cd /data/data/" + s + " && wget https://raw.githubusercontent.com/EXALAB/Busybox-Installer-No-Root/master/app/src/main/res/raw/busybox_mips && rm -rf busybox && mv busybox_mips busybox && chmod 755 busybox");
                         clipboard.setPrimaryClip(clip);
                     }else if(s2.equals("mips64")){
-                        ClipData clip = ClipData.newPlainText("Command", "cd /data/data" + s + " && wget https://raw.githubusercontent.com/EXALAB/Busybox-Installer-No-Root/master/app/src/main/res/raw/busybox_mips64 && rm -rf busybox && mv busybox_mips64 busybox && chmod 755 busybox");
+                        ClipData clip = ClipData.newPlainText("Command", "cd /data/data/" + s + " && wget https://raw.githubusercontent.com/EXALAB/Busybox-Installer-No-Root/master/app/src/main/res/raw/busybox_mips64 && rm -rf busybox && mv busybox_mips64 busybox && chmod 755 busybox");
                         clipboard.setPrimaryClip(clip);
                     }
                 }
@@ -160,22 +160,22 @@ public class Method2 extends Fragment implements AppSelector {
             public void onClick(View v) {
                 ClipboardManager clipboard = (ClipboardManager)context.getSystemService(Context.CLIPBOARD_SERVICE);
                 if(s2.equals("arm64-v8a")){
-                    ClipData clip = ClipData.newPlainText("Command", "cd /data/data" + s);
+                    ClipData clip = ClipData.newPlainText("Command", "cd /data/data/" + s);
                     clipboard.setPrimaryClip(clip);
                 }else if (s2.contains("arm")){
-                    ClipData clip = ClipData.newPlainText("Command", "cd /data/data" + s);
+                    ClipData clip = ClipData.newPlainText("Command", "cd /data/data/" + s);
                     clipboard.setPrimaryClip(clip);
                 }else if(s2.equals("x86")){
-                    ClipData clip = ClipData.newPlainText("Command", "cd /data/data" + s);
+                    ClipData clip = ClipData.newPlainText("Command", "cd /data/data/" + s);
                     clipboard.setPrimaryClip(clip);
                 }else if(s2.equals("x86_64")){
-                    ClipData clip = ClipData.newPlainText("Command", "cd /data/data" + s);
+                    ClipData clip = ClipData.newPlainText("Command", "cd /data/data/" + s);
                     clipboard.setPrimaryClip(clip);
                 }else if(s2.equals("mips")){
-                    ClipData clip = ClipData.newPlainText("Command", "cd /data/data" + s);
+                    ClipData clip = ClipData.newPlainText("Command", "cd /data/data/" + s);
                     clipboard.setPrimaryClip(clip);
                 }else if(s2.equals("mips64")){
-                    ClipData clip = ClipData.newPlainText("Command", "cd /data/data" + s);
+                    ClipData clip = ClipData.newPlainText("Command", "cd /data/data/" + s);
                     clipboard.setPrimaryClip(clip);
                 }
             }
@@ -198,22 +198,22 @@ public class Method2 extends Fragment implements AppSelector {
         s = sharedPreferences.getString("ChoosenTerminal", "None");
         if(s2.equals("arm64-v8a")){
             textView2.setText("Step 2 : Copy the command to clipboard :\n\n" + "cd /data/data" + s + " && wget https://raw.githubusercontent.com/EXALAB/Busybox-Installer-No-Root/master/app/src/main/res/raw/busybox_arm64 && rm -rf busybox && mv busybox_arm64 busybox && chmod 755 busybox");
-            textView4.setText("Step 2 : Copy the command to clipboard :\n\n" + "cd /data/data" + s);
+            textView4.setText("Step 4 : Copy the command to clipboard :\n\n" + "cd /data/data" + s);
         }else if (s2.contains("arm")){
             textView2.setText("Step 2 : Copy the command to clipboard :\n\n" + "cd /data/data" + s + " && wget https://raw.githubusercontent.com/EXALAB/Busybox-Installer-No-Root/master/app/src/main/res/raw/busybox_arm && rm -rf busybox && mv busybox_arm busybox && chmod 755 busybox");
-            textView4.setText("Step 2 : Copy the command to clipboard :\n\n" + "cd /data/data" + s);
+            textView4.setText("Step 4 : Copy the command to clipboard :\n\n" + "cd /data/data" + s);
         }else if(s2.equals("x86")){
             textView2.setText("Step 2 : Copy the command to clipboard :\n\n" + "cd /data/data" + s + " && wget https://raw.githubusercontent.com/EXALAB/Busybox-Installer-No-Root/master/app/src/main/res/raw/busybox_x86 && rm -rf busybox && mv busybox_x86 busybox && chmod 755 busybox");
-            textView4.setText("Step 2 : Copy the command to clipboard :\n\n" + "cd /data/data" + s);
+            textView4.setText("Step 4 : Copy the command to clipboard :\n\n" + "cd /data/data" + s);
         }else if(s2.equals("x86_64")){
             textView2.setText("Step 2 : Copy the command to clipboard :\n\n" + "cd /data/data" + s + " && wget https://raw.githubusercontent.com/EXALAB/Busybox-Installer-No-Root/master/app/src/main/res/raw/busybox_amd64 && rm -rf busybox && mv busybox_amd64 busybox && chmod 755 busybox");
-            textView4.setText("Step 2 : Copy the command to clipboard :\n\n" + "cd /data/data" + s);
+            textView4.setText("Step 4 : Copy the command to clipboard :\n\n" + "cd /data/data" + s);
         }else if(s2.equals("mips")){
             textView2.setText("Step 2 : Copy the command to clipboard :\n\n" + "cd /data/data" + s + " && wget https://raw.githubusercontent.com/EXALAB/Busybox-Installer-No-Root/master/app/src/main/res/raw/busybox_mips && rm -rf busybox && mv busybox_mips busybox && chmod 755 busybox");
-            textView4.setText("Step 2 : Copy the command to clipboard :\n\n" + "cd /data/data" + s);
+            textView4.setText("Step 4 : Copy the command to clipboard :\n\n" + "cd /data/data" + s);
         }else if(s2.equals("mips64")){
             textView2.setText("Step 2 : Copy the command to clipboard :\n\n" + "cd /data/data" + s + " && wget https://raw.githubusercontent.com/EXALAB/Busybox-Installer-No-Root/master/app/src/main/res/raw/busybox_mips64 && rm -rf busybox && mv busybox_mips64 busybox && chmod 755 busybox");
-            textView4.setText("Step 2 : Copy the command to clipboard :\n\n" + "cd /data/data" + s);
+            textView4.setText("Step 4 : Copy the command to clipboard :\n\n" + "cd /data/data" + s);
         }
         button2.setEnabled(true);
         button4.setEnabled(true);
