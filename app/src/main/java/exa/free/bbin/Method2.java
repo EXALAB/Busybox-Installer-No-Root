@@ -17,6 +17,7 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +30,9 @@ import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -49,11 +53,13 @@ public class Method2 extends Fragment implements AppSelector {
     Button button2;
     Button button3;
     Button button4;
-    TextView textView2;
-    TextView textView4;
-    InterstitialAd mInterstitialAd;
+    Button button5;
+    TextView textView3;
+    TextView textView5;
+    ProgressDialog mProgressDialog;
     String s;
     String s2;
+    InterstitialAd mInterstitialAd;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 
@@ -68,12 +74,19 @@ public class Method2 extends Fragment implements AppSelector {
         button2 = view.findViewById(R.id.button2);
         button3 = view.findViewById(R.id.button3);
         button4 = view.findViewById(R.id.button4);
-        textView2 = view.findViewById(R.id.textView2);
-        textView4 = view.findViewById(R.id.textView4);
+        button5 = view.findViewById(R.id.button5);
+        textView3 = view.findViewById(R.id.textView3);
+        textView5 = view.findViewById(R.id.textView5);
 
         mInterstitialAd = new InterstitialAd(context);
-        mInterstitialAd.setAdUnitId("ca-app-pub-5748356089815497/5774034698");
+        mInterstitialAd.setAdUnitId("ca-app-pub-5748356089815497/2595876004");
         mInterstitialAd.loadAd(new AdRequest.Builder().build());
+
+        mProgressDialog = new ProgressDialog(getActivity());
+        mProgressDialog.setMessage("Connecting...");
+        mProgressDialog.setIndeterminate(true);
+        mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        mProgressDialog.setCancelable(false);
 
         if(Build.VERSION.SDK_INT >= 21){
             s2 = Build.SUPPORTED_ABIS[0];
@@ -82,68 +95,74 @@ public class Method2 extends Fragment implements AppSelector {
         }
 
         if(s.equals("None")){
-            textView2.setText("Step 2 : Please Choose a Terminal Emulator App first");
-            textView4.setText("Step 4 : Please Choose a Terminal Emulator App first");
-            button2.setEnabled(false);
-            button4.setEnabled(false);
+            textView3.setText("Step 3 : Please Choose a Terminal Emulator App first");
+            textView5.setText("Step 5 : Please Choose a Terminal Emulator App first");
+            button3.setEnabled(false);
+            button5.setEnabled(false);
         }else{
             if(s2.equals("arm64-v8a")){
-                textView2.setText("Step 2 : Copy the command to clipboard :\n\n" + "cd /data/data/" + s + " && wget https://raw.githubusercontent.com/EXALAB/Busybox-Installer-No-Root/master/app/src/main/res/raw/busybox_arm64 && rm -rf busybox && mv busybox_arm64 busybox && chmod 755 busybox");
-                textView4.setText("Step 4 : Copy the command to clipboard :\n\n" + "cd /data/data/" + s);
+                textView3.setText("Step 3 : Copy the command to clipboard :\n\n" + "cd /data/data/" + s + " && mv " + context.getExternalFilesDir(null) + "/busybox " + "/data/data/" + s + " && chmod 755 busybox");
+                textView5.setText("Step 5 : Copy the command to clipboard :\n\n" + "cd /data/data" + s);
             }else if (s2.contains("arm")){
-                textView2.setText("Step 2 : Copy the command to clipboard :\n\n" + "cd /data/data/" + s + " && wget https://raw.githubusercontent.com/EXALAB/Busybox-Installer-No-Root/master/app/src/main/res/raw/busybox_arm && rm -rf busybox && mv busybox_arm busybox && chmod 755 busybox");
-                textView4.setText("Step 4 : Copy the command to clipboard :\n\n" + "cd /data/data/" + s);
+                textView3.setText("Step 3 : Copy the command to clipboard :\n\n" + "cd /data/data/" + s + " && mv " + context.getExternalFilesDir(null) + "/busybox " + "/data/data/" + s + " && chmod 755 busybox");
+                textView5.setText("Step 5 : Copy the command to clipboard :\n\n" + "cd /data/data/" + s);
             }else if(s2.equals("x86")){
-                textView2.setText("Step 2 : Copy the command to clipboard :\n\n" + "cd /data/data/" + s + " && wget https://raw.githubusercontent.com/EXALAB/Busybox-Installer-No-Root/master/app/src/main/res/raw/busybox_x86 && rm -rf busybox && mv busybox_x86 busybox && chmod 755 busybox");
-                textView4.setText("Step 4 : Copy the command to clipboard :\n\n" + "cd /data/data/" + s);
+                textView3.setText("Step 3 : Copy the command to clipboard :\n\n" + "cd /data/data/" + s + " && mv " + context.getExternalFilesDir(null) + "/busybox " + "/data/data/" + s + " && chmod 755 busybox");
+                textView5.setText("Step 5 : Copy the command to clipboard :\n\n" + "cd /data/data/" + s);
             }else if(s2.equals("x86_64")){
-                textView2.setText("Step 2 : Copy the command to clipboard :\n\n" + "cd /data/data/" + s + " && wget https://raw.githubusercontent.com/EXALAB/Busybox-Installer-No-Root/master/app/src/main/res/raw/busybox_amd64 && rm -rf busybox && mv busybox_amd64 busybox && chmod 755 busybox");
-                textView4.setText("Step 4 : Copy the command to clipboard :\n\n" + "cd /data/data/" + s);
+                textView3.setText("Step 3 : Copy the command to clipboard :\n\n" + "cd /data/data/" + s + " && mv " + context.getExternalFilesDir(null) + "/busybox " + "/data/data/" + s + " && chmod 755 busybox");
+                textView5.setText("Step 5 : Copy the command to clipboard :\n\n" + "cd /data/data/" + s);
             }else if(s2.equals("mips")){
-                textView2.setText("Step 2 : Copy the command to clipboard :\n\n" + "cd /data/data/" + s + " && wget https://raw.githubusercontent.com/EXALAB/Busybox-Installer-No-Root/master/app/src/main/res/raw/busybox_mips && rm -rf busybox && mv busybox_mips busybox && chmod 755 busybox");
-                textView4.setText("Step 4 : Copy the command to clipboard :\n\n" + "cd /data/data/" + s);
+                textView3.setText("Step 3 : Copy the command to clipboard :\n\n" + "cd /data/data/" + s + " && mv " + context.getExternalFilesDir(null) + "/busybox " + "/data/data/" + s + " && chmod 755 busybox");
+                textView5.setText("Step 5 : Copy the command to clipboard :\n\n" + "cd /data/data/" + s);
             }else if(s2.equals("mips64")){
-                textView2.setText("Step 2 : Copy the command to clipboard :\n\n" + "cd /data/data/" + s + " && wget https://raw.githubusercontent.com/EXALAB/Busybox-Installer-No-Root/master/app/src/main/res/raw/busybox_mips64 && rm -rf busybox && mv busybox_mips64 busybox && chmod 755 busybox");
-                textView4.setText("Step 4 : Copy the command to clipboard :\n\n" + "cd /data/data/" + s);
+                textView3.setText("Step 3 : Copy the command to clipboard :\n\n" + "cd /data/data/" + s + " && mv " + context.getExternalFilesDir(null) + "/busybox " + "/data/data/" + s + " && chmod 755 busybox");
+                textView5.setText("Step 5 : Copy the command to clipboard :\n\n" + "cd /data/data/" + s);
             }
         }
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showAppsDialog();
+                new Install().execute();
             }
         });
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ClipboardManager clipboard = (ClipboardManager)context.getSystemService(Context.CLIPBOARD_SERVICE);
+                showAppsDialog();
+            }
+        });
+        button3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 if(mInterstitialAd != null && mInterstitialAd.isLoaded()){
                     mInterstitialAd.show();
                 }else{
+                    ClipboardManager clipboard = (ClipboardManager)context.getSystemService(Context.CLIPBOARD_SERVICE);
                     if(s2.equals("arm64-v8a")){
-                        ClipData clip = ClipData.newPlainText("Command", "cd /data/data/" + s + " && wget https://raw.githubusercontent.com/EXALAB/Busybox-Installer-No-Root/master/app/src/main/res/raw/busybox_arm64 && rm -rf busybox && mv busybox_arm64 busybox && chmod 755 busybox");
+                        ClipData clip = ClipData.newPlainText("Command", "cd /data/data/" + s + " && mv " + context.getExternalFilesDir(null) + "/busybox " + "/data/data/" + s + " && chmod 755 busybox");
                         clipboard.setPrimaryClip(clip);
                     }else if (s2.contains("arm")){
-                        ClipData clip = ClipData.newPlainText("Command", "cd /data/data/" + s + " && wget https://raw.githubusercontent.com/EXALAB/Busybox-Installer-No-Root/master/app/src/main/res/raw/busybox_arm && rm -rf busybox && mv busybox_arm busybox && chmod 755 busybox");
+                        ClipData clip = ClipData.newPlainText("Command", "cd /data/data/" + s + " && mv " + context.getExternalFilesDir(null) + "/busybox " + "/data/data/" + s + " && chmod 755 busybox");
                         clipboard.setPrimaryClip(clip);
                     }else if(s2.equals("x86")){
-                        ClipData clip = ClipData.newPlainText("Command", "cd /data/data/" + s + " && wget https://raw.githubusercontent.com/EXALAB/Busybox-Installer-No-Root/master/app/src/main/res/raw/busybox_x86 && rm -rf busybox && mv busybox_x86 busybox && chmod 755 busybox");
+                        ClipData clip = ClipData.newPlainText("Command", "cd /data/data/" + s + " && mv " + context.getExternalFilesDir(null) + "/busybox " + "/data/data/" + s + " && chmod 755 busybox");
                         clipboard.setPrimaryClip(clip);
                     }else if(s2.equals("x86_64")){
-                        ClipData clip = ClipData.newPlainText("Command", "cd /data/data/" + s + " && wget https://raw.githubusercontent.com/EXALAB/Busybox-Installer-No-Root/master/app/src/main/res/raw/busybox_amd64 && rm -rf busybox && mv busybox_amd64 busybox && chmod 755 busybox");
+                        ClipData clip = ClipData.newPlainText("Command", "cd /data/data/" + s + " && mv " + context.getExternalFilesDir(null) + "/busybox " + "/data/data/" + s + " && chmod 755 busybox");
                         clipboard.setPrimaryClip(clip);
                     }else if(s2.equals("mips")){
-                        ClipData clip = ClipData.newPlainText("Command", "cd /data/data/" + s + " && wget https://raw.githubusercontent.com/EXALAB/Busybox-Installer-No-Root/master/app/src/main/res/raw/busybox_mips && rm -rf busybox && mv busybox_mips busybox && chmod 755 busybox");
+                        ClipData clip = ClipData.newPlainText("Command", "cd /data/data/" + s + " && mv " + context.getExternalFilesDir(null) + "/busybox " + "/data/data/" + s + " && chmod 755 busybox");
                         clipboard.setPrimaryClip(clip);
                     }else if(s2.equals("mips64")){
-                        ClipData clip = ClipData.newPlainText("Command", "cd /data/data/" + s + " && wget https://raw.githubusercontent.com/EXALAB/Busybox-Installer-No-Root/master/app/src/main/res/raw/busybox_mips64 && rm -rf busybox && mv busybox_mips64 busybox && chmod 755 busybox");
+                        ClipData clip = ClipData.newPlainText("Command", "cd /data/data/" + s + " && mv " + context.getExternalFilesDir(null) + "/busybox " + "/data/data/" + s + " &&  chmod 755 busybox");
                         clipboard.setPrimaryClip(clip);
                     }
                 }
             }
         });
-        button3.setOnClickListener(new View.OnClickListener() {
+        button4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 s = sharedPreferences.getString("ChoosenTerminal", "None");
@@ -155,7 +174,7 @@ public class Method2 extends Fragment implements AppSelector {
                 }
             }
         });
-        button4.setOnClickListener(new View.OnClickListener() {
+        button5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ClipboardManager clipboard = (ClipboardManager)context.getSystemService(Context.CLIPBOARD_SERVICE);
@@ -180,11 +199,30 @@ public class Method2 extends Fragment implements AppSelector {
                 }
             }
         });
-
         mInterstitialAd.setAdListener(new AdListener() {
             @Override
             public void onAdClosed() {
                 mInterstitialAd.loadAd(new AdRequest.Builder().build());
+                ClipboardManager clipboard = (ClipboardManager)context.getSystemService(Context.CLIPBOARD_SERVICE);
+                if(s2.equals("arm64-v8a")){
+                    ClipData clip = ClipData.newPlainText("Command", "cd /data/data/" + s + " && mv " + context.getExternalFilesDir(null) + "/busybox " + "/data/data/" + s + " && chmod 755 busybox");
+                    clipboard.setPrimaryClip(clip);
+                }else if (s2.contains("arm")){
+                    ClipData clip = ClipData.newPlainText("Command", "cd /data/data/" + s + " && mv " + context.getExternalFilesDir(null) + "/busybox " + "/data/data/" + s + " && chmod 755 busybox");
+                    clipboard.setPrimaryClip(clip);
+                }else if(s2.equals("x86")){
+                    ClipData clip = ClipData.newPlainText("Command", "cd /data/data/" + s + " && mv " + context.getExternalFilesDir(null) + "/busybox " + "/data/data/" + s + " && chmod 755 busybox");
+                    clipboard.setPrimaryClip(clip);
+                }else if(s2.equals("x86_64")){
+                    ClipData clip = ClipData.newPlainText("Command", "cd /data/data/" + s + " && mv " + context.getExternalFilesDir(null) + "/busybox " + "/data/data/" + s + " && chmod 755 busybox");
+                    clipboard.setPrimaryClip(clip);
+                }else if(s2.equals("mips")){
+                    ClipData clip = ClipData.newPlainText("Command", "cd /data/data/" + s + " && mv " + context.getExternalFilesDir(null) + "/busybox " + "/data/data/" + s + " && chmod 755 busybox");
+                    clipboard.setPrimaryClip(clip);
+                }else if(s2.equals("mips64")){
+                    ClipData clip = ClipData.newPlainText("Command", "cd /data/data/" + s + " && mv " + context.getExternalFilesDir(null) + "/busybox " + "/data/data/" + s + " &&  chmod 755 busybox");
+                    clipboard.setPrimaryClip(clip);
+                }
             }
         });
 
@@ -197,26 +235,26 @@ public class Method2 extends Fragment implements AppSelector {
         editor.apply();
         s = sharedPreferences.getString("ChoosenTerminal", "None");
         if(s2.equals("arm64-v8a")){
-            textView2.setText("Step 2 : Copy the command to clipboard :\n\n" + "cd /data/data" + s + " && wget https://raw.githubusercontent.com/EXALAB/Busybox-Installer-No-Root/master/app/src/main/res/raw/busybox_arm64 && rm -rf busybox && mv busybox_arm64 busybox && chmod 755 busybox");
-            textView4.setText("Step 4 : Copy the command to clipboard :\n\n" + "cd /data/data" + s);
+            textView3.setText("Step 3 : Copy the command to clipboard :\n\n" + "cd /data/data/" + s + " && mv " + context.getExternalFilesDir(null) + "/busybox " + "/data/data/" + s + " && chmod 755 busybox");
+            textView5.setText("Step 5 : Copy the command to clipboard :\n\n" + "cd /data/data" + s);
         }else if (s2.contains("arm")){
-            textView2.setText("Step 2 : Copy the command to clipboard :\n\n" + "cd /data/data" + s + " && wget https://raw.githubusercontent.com/EXALAB/Busybox-Installer-No-Root/master/app/src/main/res/raw/busybox_arm && rm -rf busybox && mv busybox_arm busybox && chmod 755 busybox");
-            textView4.setText("Step 4 : Copy the command to clipboard :\n\n" + "cd /data/data" + s);
+            textView3.setText("Step 3 : Copy the command to clipboard :\n\n" + "cd /data/data/" + s + " && mv " + context.getExternalFilesDir(null) + "/busybox " + "/data/data/" + s + " && chmod 755 busybox");
+            textView5.setText("Step 5 : Copy the command to clipboard :\n\n" + "cd /data/data/" + s);
         }else if(s2.equals("x86")){
-            textView2.setText("Step 2 : Copy the command to clipboard :\n\n" + "cd /data/data" + s + " && wget https://raw.githubusercontent.com/EXALAB/Busybox-Installer-No-Root/master/app/src/main/res/raw/busybox_x86 && rm -rf busybox && mv busybox_x86 busybox && chmod 755 busybox");
-            textView4.setText("Step 4 : Copy the command to clipboard :\n\n" + "cd /data/data" + s);
+            textView3.setText("Step 3 : Copy the command to clipboard :\n\n" + "cd /data/data/" + s + " && mv " + context.getExternalFilesDir(null) + "/busybox " + "/data/data/" + s + " && chmod 755 busybox");
+            textView5.setText("Step 5 : Copy the command to clipboard :\n\n" + "cd /data/data/" + s);
         }else if(s2.equals("x86_64")){
-            textView2.setText("Step 2 : Copy the command to clipboard :\n\n" + "cd /data/data" + s + " && wget https://raw.githubusercontent.com/EXALAB/Busybox-Installer-No-Root/master/app/src/main/res/raw/busybox_amd64 && rm -rf busybox && mv busybox_amd64 busybox && chmod 755 busybox");
-            textView4.setText("Step 4 : Copy the command to clipboard :\n\n" + "cd /data/data" + s);
+            textView3.setText("Step 3 : Copy the command to clipboard :\n\n" + "cd /data/data/" + s + " && mv " + context.getExternalFilesDir(null) + "/busybox " + "/data/data/" + s + " && chmod 755 busybox");
+            textView5.setText("Step 5 : Copy the command to clipboard :\n\n" + "cd /data/data/" + s);
         }else if(s2.equals("mips")){
-            textView2.setText("Step 2 : Copy the command to clipboard :\n\n" + "cd /data/data" + s + " && wget https://raw.githubusercontent.com/EXALAB/Busybox-Installer-No-Root/master/app/src/main/res/raw/busybox_mips && rm -rf busybox && mv busybox_mips busybox && chmod 755 busybox");
-            textView4.setText("Step 4 : Copy the command to clipboard :\n\n" + "cd /data/data" + s);
+            textView3.setText("Step 3 : Copy the command to clipboard :\n\n" + "cd /data/data/" + s + " && mv " + context.getExternalFilesDir(null) + "/busybox " + "/data/data/" + s + " && chmod 755 busybox");
+            textView5.setText("Step 5 : Copy the command to clipboard :\n\n" + "cd /data/data/" + s);
         }else if(s2.equals("mips64")){
-            textView2.setText("Step 2 : Copy the command to clipboard :\n\n" + "cd /data/data" + s + " && wget https://raw.githubusercontent.com/EXALAB/Busybox-Installer-No-Root/master/app/src/main/res/raw/busybox_mips64 && rm -rf busybox && mv busybox_mips64 busybox && chmod 755 busybox");
-            textView4.setText("Step 4 : Copy the command to clipboard :\n\n" + "cd /data/data" + s);
+            textView3.setText("Step 3 : Copy the command to clipboard :\n\n" + "cd /data/data/" + s + " && mv " + context.getExternalFilesDir(null) + "/busybox " + "/data/data/" + s + " && chmod 755 busybox");
+            textView5.setText("Step 5 : Copy the command to clipboard :\n\n" + "cd /data/data/" + s);
         }
-        button2.setEnabled(true);
-        button4.setEnabled(true);
+        button3.setEnabled(true);
+        button5.setEnabled(true);
         alert.dismiss();
     }
     @Override
@@ -237,6 +275,72 @@ public class Method2 extends Fragment implements AppSelector {
         alert.setView(view);
         alert.show();
         new InitializeApps().execute();
+    }
+    private class Install extends AsyncTask<Void, Void, Void> {
+        String s;
+        final ViewGroup nullParent = null;
+        private AlertDialog.Builder builder;
+        private AlertDialog alertDialog;
+        private ProgressDialog dialog;
+
+        private Install() {
+            this.builder = null;
+            this.alertDialog = null;
+            this.dialog = null;
+        }
+
+        protected void onPreExecute() {
+            if(Build.VERSION.SDK_INT >= 26){
+                this.builder = new AlertDialog.Builder(getActivity());
+                this.alertDialog = builder.create();
+                LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
+                View view = layoutInflater.inflate(R.layout.progress_bar, nullParent);
+                this.alertDialog.setView(view);
+                this.alertDialog.setCancelable(false);
+                this.alertDialog.show();
+                TextView textView = view.findViewById(R.id.textView);
+                textView.setText(R.string.installing);
+            }else{
+                this.dialog = new ProgressDialog(getActivity());
+                this.dialog.setMessage(getString(R.string.installing));
+                this.dialog.setIndeterminate(true);
+                this.dialog.setCancelable(false);
+                this.dialog.show();
+            }
+        }
+
+        protected Void doInBackground(Void... params) {
+            if(Build.VERSION.SDK_INT >= 21){
+                s = Build.SUPPORTED_ABIS[0];
+            }else{
+                s = Build.CPU_ABI;
+            }
+            if(s.equals("arm64-v8a")){
+                CreateFile("busybox", R.raw.busybox_arm64);
+            }else if (s.contains("arm")){
+                CreateFile("busybox", R.raw.busybox_arm);
+            }else if(s.equals("x86")){
+                CreateFile("busybox", R.raw.busybox_x86);
+            }else if(s.equals("x86_64")){
+                CreateFile("busybox", R.raw.busybox_amd64);
+            }else if(s.equals("mips")){
+                CreateFile("busybox", R.raw.busybox_mips);
+            }else if(s.equals("mips64")){
+                CreateFile("busybox", R.raw.busybox_mips64);
+            }else{
+                Toast.makeText(context, "Sorry, your device is not supported !", Toast.LENGTH_LONG).show();
+            }
+            return null;
+        }
+        protected void onPostExecute(Void result) {
+            if(Method2.this.isVisible()){
+                if(Build.VERSION.SDK_INT >= 26){
+                    this.alertDialog.dismiss();
+                }else{
+                    this.dialog.dismiss();
+                }
+            }
+        }
     }
     private class InitializeApps extends AsyncTask<Void, Void, Void> {
         final ViewGroup nullParent = null;
@@ -336,6 +440,25 @@ public class Method2 extends Fragment implements AppSelector {
         }
         return applicationAdapterListItems;
     }
+    private void CreateFile(String filename, int resource) {
+        try {
+            InputStream in = getResources().openRawResource(resource);
+            FileOutputStream out = new FileOutputStream(context.getExternalFilesDir(null) + "/" + filename);
+            byte[] buff = new byte[1024];
+            int read = 0;
+
+            try {
+                while ((read = in.read(buff)) > 0) {
+                    out.write(buff, 0, read);
+                }
+            } finally {
+                in.close();
+                out.close();
+            }
+        } catch (IOException e) {
+            Log.e("error", "Failed to copy file: " + filename, e);
+        }
+    }
     private boolean isSystemPackage(PackageInfo packageInfo) {
         return (packageInfo.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0;
     }
@@ -357,5 +480,9 @@ public class Method2 extends Fragment implements AppSelector {
         } catch (PackageManager.NameNotFoundException e) {
             return false;
         }
+    }
+    private boolean donationInstalled() {
+        PackageManager packageManager = context.getPackageManager();
+        return packageManager.checkSignatures(context.getPackageName(), "exa.ag.d") == PackageManager.SIGNATURE_MATCH;
     }
 }
