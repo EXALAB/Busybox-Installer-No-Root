@@ -79,7 +79,7 @@ public class Method2 extends Fragment implements AppSelector {
         textView5 = view.findViewById(R.id.textView5);
 
         mInterstitialAd = new InterstitialAd(context);
-        mInterstitialAd.setAdUnitId("ca-app-pub-5748356089815497/2595876004");
+        mInterstitialAd.setAdUnitId("ca-app-pub-5748356089815497/5836001022");
         mInterstitialAd.loadAd(new AdRequest.Builder().build());
 
         mProgressDialog = new ProgressDialog(getActivity());
