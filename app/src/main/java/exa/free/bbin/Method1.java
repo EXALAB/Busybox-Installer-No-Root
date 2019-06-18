@@ -22,6 +22,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,6 +51,7 @@ public class Method1 extends Fragment {
     TextView textView2;
     InterstitialAd mInterstitialAd;
     int version;
+    boolean isUserNotified;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 
@@ -59,6 +62,8 @@ public class Method1 extends Fragment {
         permissionVerifier = new PermissionVerifier(context);
 
         sharedPreferences = context.getSharedPreferences("GlobalPreferences", 0);
+
+        isUserNotified = sharedPreferences.getBoolean("IsUserNotified", false);
 
         editor = sharedPreferences.edit();
 
@@ -143,6 +148,10 @@ public class Method1 extends Fragment {
                 }
             }
         });
+
+        if(!isUserNotified){
+            showFirstDialog();
+        }
 
         return view;
     }
@@ -492,5 +501,46 @@ public class Method1 extends Fragment {
         } catch (PackageManager.NameNotFoundException e) {
             return false;
         }
+    }
+    protected void showFirstDialog(){
+
+        final ViewGroup nullParent = null;
+
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+        LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
+        View view = layoutInflater.inflate(R.layout.first_warning, nullParent);
+        CheckBox checkBox = view.findViewById(R.id.checkBox);
+        builder.setView(view);
+        builder.setCancelable(false);
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which){
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putBoolean("IsUserNotified", true);
+                editor.apply();
+                isUserNotified = sharedPreferences.getBoolean("IsUserNotified", false);
+                dialog.dismiss();
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which){
+                getActivity().finish();
+                dialog.dismiss();
+            }
+        });
+        final AlertDialog dialog = builder.create();
+        dialog.show();
+
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
+        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(true);
+                }else{
+                    dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
+                }
+            }
+        });
     }
 }

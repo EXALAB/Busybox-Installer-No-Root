@@ -481,8 +481,4 @@ public class Method2 extends Fragment implements AppSelector {
             return false;
         }
     }
-    private boolean donationInstalled() {
-        PackageManager packageManager = context.getPackageManager();
-        return packageManager.checkSignatures(context.getPackageName(), "exa.ag.d") == PackageManager.SIGNATURE_MATCH;
-    }
 }

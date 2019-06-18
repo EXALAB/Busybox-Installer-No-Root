@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="First of all, thanks for downloading this app, here is some explanation of how it works.\n\nMethod 1: This app install the bundled Busybox file under its installation directory, and then user ncopy the export PATH command to make the system recognize the directory.\n\nMethod 2: This method let user choose their preferred Terminal, then issue a command to let user copy the Busybox binary manually to the TERMINAL INSTALLATION DIRECTORY.\n\nIf you don't want or don't agree with how this app works, please do not use this app.\n\n\nDo you agree with above terms?"
+            android:textSize="15sp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <CheckBox
+            android:id="@+id/checkBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleX="1"
+            android:scaleY="1"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginStart="15dp"
+            android:layout_below="@id/textView"
+            android:text="" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="17dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_below="@id/textView"
+            android:layout_toRightOf="@id/checkBox"
+            android:layout_toEndOf="@id/checkBox"
+            android:text="I Agree"
+            android:textSize="15sp"/>
+
+    </RelativeLayout>
+
+</ScrollView>
