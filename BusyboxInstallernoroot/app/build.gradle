@@ -1,0 +1,39 @@
+apply plugin: 'com.android.application'
+
+android {
+    flavorDimensions "default"
+    compileSdkVersion 29
+    defaultConfig {
+        applicationId "exa.free.bbin"
+        minSdkVersion 14
+        targetSdkVersion 29
+        versionCode 190
+        versionName "1.90"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    productFlavors{
+        flavor1{
+            proguardFile "proguard-rules.pro"
+        }
+    }
+    return void
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.annotation:annotation:1.1.0'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'com.google.android.material:material:1.1.0'
+    implementation 'com.google.android.gms:play-services-ads:18.3.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+}
