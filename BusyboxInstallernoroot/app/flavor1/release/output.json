@@ -1,1 +1,20 @@
-[{"outputType":{"type":"APK"},"apkData":{"type":"MAIN","splits":[],"versionCode":200,"versionName":"2.00","enabled":true,"outputFile":"app-flavor1-release.apk","fullName":"flavor1Release","baseName":"flavor1-release"},"path":"app-flavor1-release.apk","properties":{}}]
+{
+  "version": 1,
+  "artifactType": {
+    "type": "APK",
+    "kind": "Directory"
+  },
+  "applicationId": "exa.free.bbin",
+  "variantName": "flavor1Release",
+  "elements": [
+    {
+      "type": "SINGLE",
+      "filters": [],
+      "properties": [],
+      "versionCode": 201,
+      "versionName": "201",
+      "enabled": true,
+      "outputFile": "app-flavor1-release.apk"
+    }
+  ]
+}
