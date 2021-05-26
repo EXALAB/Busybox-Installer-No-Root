@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/BusyboxInstallernoroot.iml" filepath="$PROJECT_DIR$/BusyboxInstallernoroot.iml" group="BusyboxInstallernoroot" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="BusyboxInstallernoroot/app" />
+      <module fileurl="file://$PROJECT_DIR$/BusyboxInstallernoroot.iml" filepath="$PROJECT_DIR$/BusyboxInstallernoroot.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/BusyboxInstallernoroot.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/BusyboxInstallernoroot.app.iml" />
     </modules>
   </component>
 </project>

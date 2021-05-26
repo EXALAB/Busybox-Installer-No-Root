@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "artifactType": {
+    "type": "APK",
+    "kind": "Directory"
+  },
+  "applicationId": "exa.free.bbin",
+  "variantName": "flavor1Release",
+  "elements": [
+    {
+      "type": "SINGLE",
+      "filters": [],
+      "versionCode": 210,
+      "versionName": "2.10",
+      "outputFile": "app-flavor1-release.apk"
+    }
+  ]
+}
