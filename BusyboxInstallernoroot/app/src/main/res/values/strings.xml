@@ -4,8 +4,7 @@
     <string name="version_string">1.31.1</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="method1">Method 1</string>
-    <string name="method2">Method 2</string>
+    <string name="install">Install</string>
     <string name="about">About</string>
     <string name="others">Others</string>
     <string name="about_busybox">About Busybox</string>
@@ -14,12 +13,9 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="ok">OK</string>
-    <string name="about_content">Busybox Version : 1.30.0\n\nBusybox Installer (no root) is an app designed to bring busybox to android device without root access.\n\nThanks for using this apps.\n\n\nRegards, EXA Lab</string>
-    <string name="step1">Note: Please scroll down to see all steps if your device screen is small.\n\nMethod 1 is recommended because not only easy to update, also make all terminal accessible to busybox. But if method 1 is not working, please try using method 2 instead.\n\nStep 1 : Click on the button to install Busybox</string>
-    <string name="step2">Step 2 : Copy the command to clipboard : \n\nexport PATH=/data/data/exa.free.bbin/files/:$PATH</string>
-    <string name="step3">Launch terminal, paste and enter the command and you can start busybox. You must paste and enter the command every time you restart the terminal.</string>
-    <string name="m2_step1">Note: Please scroll down to see all steps if your device screen is small.\n\nStep 1 : Click on the button to Copy Busybox</string>
-    <string name="m2_step2">Note: Please scroll down to see all steps if your device screen is small.\n\nStep 1 : Please choose a Terminal Emulator App.</string>
+    <string name="about_content">Busybox Version : 1.31.1\n\nBusybox Installer (no root) is an app designed to bring busybox to android device without root access.\n\nThanks for using this apps.\n\n\nRegards, EXA Lab</string>
+    <string name="m2_step1">Note: Please scroll down to see all steps if your device screen is small.\n\nStep 1 : Click on the button to Download Busybox</string>
+    <string name="m2_step2">Step 2 : Please choose a Terminal Emulator App.</string>
     <string name="m2_step4">Step 4: Launch terminal, paste and enter the command to install Busybox. You can then run Busybox with ./busybox command.\n\nIMPORTANT: You must paste and enter the command IN STEP 5 next time after you restart the terminal.</string>
     <string name="installing">Installing</string>
     <string name="updating">Updating</string>

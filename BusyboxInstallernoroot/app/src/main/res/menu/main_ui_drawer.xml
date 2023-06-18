@@ -5,13 +5,9 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/method1"
-            android:icon="@drawable/ic_method1"
-            android:title="@string/method1" />
-        <item
-            android:id="@+id/method2"
-            android:icon="@drawable/ic_method2"
-            android:title="@string/method2" />
+            android:id="@+id/install"
+            android:icon="@drawable/ic_install"
+            android:title="@string/install" />
     </group>
 
     <item android:title="@string/others">

@@ -1,10 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="exa.free.bbin">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
-        android:maxSdkVersion="18" />
+        tools:ignore="ScopedStorage" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_DOWNLOAD_MANAGER" />
     <uses-permission android:name="QUERY_ALL_PACKAGES"/>
+
+    <queries>
+        <!-- Explicit apps you know in advance about: -->
+        <package android:name="jackpal.androidterm"/>
+        <!-- If you don't know apps in advance : -->
+        <!-- <package android:name="QUERY_ALL_PACKAGES"/> -->
+        <package android:name="QUERY_ALL_PACKAGES"/>
+        <intent>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent>
+    </queries>
 
     <application
         android:allowBackup="true"
@@ -18,6 +33,7 @@
             android:value="ca-app-pub-5748356089815497~7951096738"/>
         <activity
             android:name=".MainUI"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
@@ -27,14 +43,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <receiver
-            android:enabled="true"
-            android:exported="true"
-            android:name="exa.free.update.UpdateReceiver">
-            <intent-filter>
-                <action android:name="android.intent.action.MY_PACKAGE_REPLACED"/>
-            </intent-filter>
-        </receiver>
     </application>
 
 </manifest>

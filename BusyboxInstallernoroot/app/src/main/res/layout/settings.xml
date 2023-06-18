@@ -8,6 +8,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
-        android:text="Show system apps in Method 2" />
+        android:text="Show system apps when choosing terminal" />
 
 </RelativeLayout>

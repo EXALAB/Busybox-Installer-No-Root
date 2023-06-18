@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "artifactType": {
     "type": "APK",
     "kind": "Directory"
@@ -10,9 +10,11 @@
     {
       "type": "SINGLE",
       "filters": [],
-      "versionCode": 212,
-      "versionName": "2.12",
+      "attributes": [],
+      "versionCode": 216,
+      "versionName": "2.16 Final",
       "outputFile": "app-flavor1-release.apk"
     }
-  ]
+  ],
+  "elementType": "File"
 }

@@ -1,0 +1,63 @@
+Index: app/src/main/java/exa/free/bbin/Method2.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/exa/free/bbin/Method2.java b/app/src/main/java/exa/free/bbin/Method2.java
+--- a/app/src/main/java/exa/free/bbin/Method2.java	
++++ b/app/src/main/java/exa/free/bbin/Method2.java	(date 1687069217962)
+@@ -1,6 +1,9 @@
+ package exa.free.bbin;
+ 
++import static android.content.Context.DOWNLOAD_SERVICE;
++
+ import android.app.AlertDialog;
++import android.app.DownloadManager;
+ import android.app.Fragment;
+ import android.app.ProgressDialog;
+ import android.content.ClipData;
+@@ -36,6 +39,7 @@
+ import com.google.android.gms.ads.interstitial.InterstitialAd;
+ import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
+ 
++import java.io.File;
+ import java.io.FileOutputStream;
+ import java.io.IOException;
+ import java.io.InputStream;
+@@ -324,7 +328,7 @@
+                 s = Build.CPU_ABI;
+             }
+             if(s.equals("arm64-v8a")){
+-                CreateFile("busybox", R.raw.busybox_arm64);
++                CreateFile(new File(context.getFilesDir() + "busybox_arm64"));
+             }else if (s.contains("arm")){
+                 CreateFile("busybox", R.raw.busybox_arm);
+             }else if(s.equals("x86")){
+@@ -448,24 +452,9 @@
+         }
+         return applicationAdapterListItems;
+     }
+-    private void CreateFile(String filename, int resource) {
+-        try {
+-            InputStream in = getResources().openRawResource(resource);
+-            FileOutputStream out = new FileOutputStream(context.getFilesDir() + "/" + filename);
+-            byte[] buff = new byte[1024];
+-            int read = 0;
+-
+-            try {
+-                while ((read = in.read(buff)) > 0) {
+-                    out.write(buff, 0, read);
+-                }
+-            } finally {
+-                in.close();
+-                out.close();
+-            }
+-        } catch (IOException e) {
+-            Log.e("error", "Failed to copy file: " + filename, e);
+-        }
++    private void CreateFile(File filename) {
++        DownloadManager downloadManager = (DownloadManager) context.getSystemService(DOWNLOAD_SERVICE);
++        downloadManager.addCompletedDownload(filename.getName(), filename.getName(), true, "text/plain",filename.getAbsolutePath(),filename.length(),true);
+     }
+     private boolean isSystemPackage(PackageInfo packageInfo) {
+         return (packageInfo.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0;
